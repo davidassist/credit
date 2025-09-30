@@ -1,0 +1,180 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "SecureAuthService",
+  "dateExported": "2024-04-01",
+  "folders": [
+    {
+      "containerId": "auth",
+      "name": "Authentication",
+      "requests": [
+        {
+          "containerId": "auth",
+          "name": "Register",
+          "url": "{{BASE_URL}}/auth/register",
+          "method": "POST",
+          "body": {
+            "type": "json",
+            "raw": {
+              "email": "user@example.com",
+              "password": "Sup3rStr0ng!",
+              "name": "Sample User"
+            }
+          }
+        },
+        {
+          "containerId": "auth",
+          "name": "Verify Email",
+          "url": "{{BASE_URL}}/auth/verify-email",
+          "method": "POST",
+          "body": {
+            "type": "json",
+            "raw": {
+              "token": "<verification-token>"
+            }
+          }
+        },
+        {
+          "containerId": "auth",
+          "name": "Login",
+          "url": "{{BASE_URL}}/auth/login",
+          "method": "POST",
+          "body": {
+            "type": "json",
+            "raw": {
+              "email": "user@example.com",
+              "password": "Sup3rStr0ng!"
+            }
+          }
+        },
+        {
+          "containerId": "auth",
+          "name": "Get Session Info",
+          "url": "{{BASE_URL}}/auth/me",
+          "method": "GET"
+        },
+        {
+          "containerId": "auth",
+          "name": "Request CSRF Token",
+          "url": "{{BASE_URL}}/auth/csrf",
+          "method": "GET"
+        },
+        {
+          "containerId": "auth",
+          "name": "Logout",
+          "url": "{{BASE_URL}}/auth/logout",
+          "method": "POST",
+          "headers": [
+            {
+              "name": "X-CSRF-Token",
+              "value": "{{CSRF_TOKEN}}"
+            }
+          ]
+        },
+        {
+          "containerId": "auth",
+          "name": "Start TOTP Setup",
+          "url": "{{BASE_URL}}/auth/mfa/totp/setup",
+          "method": "POST",
+          "headers": [
+            {
+              "name": "X-CSRF-Token",
+              "value": "{{CSRF_TOKEN}}"
+            }
+          ]
+        },
+        {
+          "containerId": "auth",
+          "name": "Verify TOTP",
+          "url": "{{BASE_URL}}/auth/mfa/totp/verify",
+          "method": "POST",
+          "body": {
+            "type": "json",
+            "raw": {
+              "code": "123456",
+              "challenge_id": "<challenge-id>"
+            }
+          }
+        },
+        {
+          "containerId": "auth",
+          "name": "Start WebAuthn Registration",
+          "url": "{{BASE_URL}}/auth/webauthn/register/start",
+          "method": "POST",
+          "headers": [
+            {
+              "name": "X-CSRF-Token",
+              "value": "{{CSRF_TOKEN}}"
+            }
+          ]
+        },
+        {
+          "containerId": "auth",
+          "name": "Finish WebAuthn Registration",
+          "url": "{{BASE_URL}}/auth/webauthn/register/finish",
+          "method": "POST",
+          "headers": [
+            {
+              "name": "X-CSRF-Token",
+              "value": "{{CSRF_TOKEN}}"
+            }
+          ],
+          "body": {
+            "type": "json",
+            "raw": {
+              "challenge_id": "<challenge-id>",
+              "client_data_json": "<client-data>",
+              "attestation_object": "<attestation-object>"
+            }
+          }
+        },
+        {
+          "containerId": "auth",
+          "name": "Password Reset Request",
+          "url": "{{BASE_URL}}/auth/password/reset/request",
+          "method": "POST",
+          "body": {
+            "type": "json",
+            "raw": {
+              "email": "user@example.com"
+            }
+          }
+        },
+        {
+          "containerId": "auth",
+          "name": "Password Reset Confirm",
+          "url": "{{BASE_URL}}/auth/password/reset/confirm",
+          "method": "POST",
+          "body": {
+            "type": "json",
+            "raw": {
+              "token": "<reset-token>",
+              "new_password": "NewSup3rStr0ng!"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "containerId": "admin",
+      "name": "Admin",
+      "requests": [
+        {
+          "containerId": "admin",
+          "name": "Admin Status",
+          "url": "{{BASE_URL}}/admin/status",
+          "method": "GET"
+        }
+      ]
+    }
+  ],
+  "environment": [
+    {
+      "name": "BASE_URL",
+      "value": "http://localhost:8000"
+    },
+    {
+      "name": "CSRF_TOKEN",
+      "value": ""
+    }
+  ]
+}
